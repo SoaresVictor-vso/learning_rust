@@ -5,7 +5,7 @@ fn main() {
     
     loop{
         let mut choice = String::new();
-        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 0 to exit;");
+        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 3 for functions;\n|Type 0 to exit;");
 
         io::stdin()
             .read_line(&mut choice)
@@ -21,6 +21,8 @@ fn main() {
             guess_game();
         } else if choice == 2 {
             variables();
+        } else if choice == 3 {
+            functions();
         } else if choice == 0 {
             println!("Successfully finished program!");
             break;
@@ -30,6 +32,32 @@ fn main() {
     }
 
 }
+
+fn functions() {
+    //Error, statement (let [...]) does not returns value, so you can't set another let with his value
+    //let x = (let y = 5);
+    //println!("The y value is {y}");
+    //println("The x value is {x}");
+
+    let prt = println!("Pato de agasalho!!!");
+    println!("{:?}", prt);
+
+    let block = {
+        let x = 5;
+        x + 12
+    };
+    
+    println!("The block value {:?}", block);
+
+    let a = 10;
+    let b = 15;
+    let sum_a_b = sum(a,b);
+    println!("The sum between {a} and {b} is equals to {sum_a_b}");
+}
+
+fn sum(x:i32, y:i32) -> i32 {
+    x + y//;
+} 
 
 fn variables() {
     // first
