@@ -2,10 +2,9 @@ use rand::Rng;
 use std::{cmp::Ordering, io};
 
 fn main() {
-    
-    loop{
+    loop {
         let mut choice = String::new();
-        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 3 for functions;\n|Type 0 to exit;");
+        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 3 for functions;\n|Type 4 for fibonacci sequence4;\n|Type 0 to exit;");
 
         io::stdin()
             .read_line(&mut choice)
@@ -23,6 +22,10 @@ fn main() {
             variables();
         } else if choice == 3 {
             functions();
+        } else if choice == 4 {
+            fibonacci();
+        } else if choice == 999 {
+            test();
         } else if choice == 0 {
             println!("Successfully finished program!");
             break;
@@ -30,7 +33,61 @@ fn main() {
             println!("Invalid option, try again!")
         }
     }
+}
 
+fn test() {
+    let condition = true;
+    let number: i8 = if condition {
+        let a = 3;
+        if a % 2 == 0 {
+            0
+        } else {
+            1
+        }
+    } else {
+        6
+    };
+
+    println!("{number}");
+}
+
+fn fibonacci() {
+    let n = read_line("Digite o número de termos a ser gerado: ");
+    let mut penult: u128 = 1;
+    let mut last: u128 = 1;
+
+    if n > 0 {
+        println!("001º => {penult}");
+    }
+    if n > 1 {
+        println!("002º => {last}");
+    }
+
+    for i in 2..n {
+        let element: u128 = last + penult;
+        let counter =  format!("{:0>3}", (i + 1).to_string());
+        println!("{counter}º => {element}");
+        penult = last;
+        last = element;
+    }
+}
+
+fn read_line(text: &str) -> u32 {
+    loop {
+        let mut enter = String::new();
+        println!("\n{text}");
+
+        io::stdin()
+            .read_line(&mut enter)
+            .expect("Failed to read line");
+
+        let enter: u32 = match enter.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        break enter;
+    }
 }
 
 fn functions() {
@@ -46,18 +103,18 @@ fn functions() {
         let x = 5;
         x + 12
     };
-    
+
     println!("The block value {:?}", block);
 
     let a = 10;
     let b = 15;
-    let sum_a_b = sum(a,b);
+    let sum_a_b = sum(a, b);
     println!("The sum between {a} and {b} is equals to {sum_a_b}");
 }
 
-fn sum(x:i32, y:i32) -> i32 {
-    x + y//;
-} 
+fn sum(x: i32, y: i32) -> i32 {
+    x + y //;
+}
 
 fn variables() {
     // first
