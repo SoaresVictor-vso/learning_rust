@@ -25,7 +25,10 @@ fn main() {
         } else if choice == 4 {
             fibonacci();
         } else if choice == 999 {
-            test();
+            let mut a = String::from("TEsteeeee");
+            println!("{a}");
+            a = test(a);
+            println!("{a}");
         } else if choice == 0 {
             println!("Successfully finished program!");
             break;
@@ -35,7 +38,8 @@ fn main() {
     }
 }
 
-fn test() {
+fn test(str: String) -> String {
+    println!("{str}");
     let condition = true;
     let number: i8 = if condition {
         let a = 3;
@@ -49,6 +53,7 @@ fn test() {
     };
 
     println!("{number}");
+    return str;
 }
 
 fn fibonacci() {
