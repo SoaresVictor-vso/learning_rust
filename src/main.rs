@@ -4,7 +4,7 @@ use std::{cmp::Ordering, io};
 fn main() {
     loop {
         let mut choice = String::new();
-        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 3 for functions;\n|Type 4 for fibonacci sequence4;\n|Type 0 to exit;");
+        println!( "\n\n---------------------------------------------------------------\n|What do you want?\n|Type 1 for Guess Game;\n|Type 2 for variables;\n|Type 3 for functions;\n|Type 4 for fibonacci sequence;\n|Type 5 for structs;\n|Type 6 for rectangles;\n|Type 0 to exit;");
 
         io::stdin()
             .read_line(&mut choice)
@@ -24,6 +24,10 @@ fn main() {
             functions();
         } else if choice == 4 {
             fibonacci();
+        } else if choice == 5 {
+            structs();
+        } else if choice == 6 {
+            rectangles();
         } else if choice == 999 {
             let mut a = String::from("TEsteeeee");
             println!("{a}");
@@ -56,6 +60,81 @@ fn test(str: String) -> String {
     return str;
 }
 
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    heigth: u32,
+}
+
+fn rectangles() {
+    println!("Rectangles\t");
+    let rect = Rectangle {
+        width: 14,
+        heigth: 10,
+    };
+    println!("{:#?}", rect);
+    println!(
+        "The rectangle with heigth {} and width {} is {}.",
+        rect.heigth,
+        rect.width,
+        calculate_rectangle_area(&rect)
+    );
+    dbg!(rect);
+}
+
+fn calculate_rectangle_area(rect: &Rectangle) -> u32 {
+    rect.width * rect.heigth
+}
+
+struct User {
+    active: bool,
+    email: String,
+    password_hash: String,
+    username: String,
+}
+
+struct Color(u8, u8, u8);
+
+fn structs() {
+    println!("Structs lorem");
+    let mut user1 = new_user(
+        String::from("lorem@ypsum.com"),
+        String::from("12312312312312312313123"),
+        String::from("lorem"),
+    );
+    let mut user2 = User {
+        email: String::from("ypsum_lorem@gmail.com"),
+        ..user1
+    };
+    let user3 = User {
+        active: user1.active,
+        email: user1.email,
+        password_hash: String::from("432432432423423423423"),
+        username: String::from("testeee"),
+    };
+    //println!("{}", user1.email); não mais resusável
+    println!("{}", user2.email);
+
+    user1.email = String::from("lorem@gmail.com");
+    println!("{}", user1.email);
+    println!("{}", user2.email);
+
+    let background_color = Color(255, 100, 200);
+    println!(
+        "R: {:#0x}, G: {:#0x}, B: {:#0x}",
+        background_color.0, background_color.1, background_color.2
+    );
+}
+
+fn new_user(email: String, password_hash: String, username: String) -> User {
+    User {
+        active: true,
+        email,
+        password_hash,
+        username,
+    }
+}
+
 fn fibonacci() {
     let n = read_line("Digite o número de termos a ser gerado: ");
     let mut penult: u128 = 1;
@@ -70,7 +149,7 @@ fn fibonacci() {
 
     for i in 2..n {
         let element: u128 = last + penult;
-        let counter =  format!("{:0>3}", (i + 1).to_string());
+        let counter = format!("{:0>3}", (i + 1).to_string());
         println!("{counter}º => {element}");
         penult = last;
         last = element;
